@@ -34,7 +34,7 @@ if (mongoURL == null && process.env.DATABASE_SERVICE_NAME) {
 }
 var db = null,
     dbDetails = new Object();
-
+var d=process.env.APPLICATION_DOMAIN;
 var initDb = function(callback) {
   if (mongoURL == null) return;
 
@@ -70,10 +70,10 @@ app.get('/', function (req, res) {
       if (err) {
         console.log('Error running count. Message:\n'+err);
       }
-      res.render('index.html', { pageCountMessage : count, dbInfo: dbDetails });
+      res.render('index.html', { pageCountMessage : count+' '+d, dbInfo: dbDetails });
     });
   } else {
-    res.render('index.html', { pageCountMessage : null});
+    res.render('index.html', { pageCountMessage : 'peshwa' +d});
   }
 });
 
